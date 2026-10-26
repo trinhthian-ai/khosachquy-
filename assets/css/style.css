@@ -1,0 +1,523 @@
+:root {
+  --bg-ivory: #FFF9EF;
+  --bg-ivory-soft: #F7EFE1;
+  --bg-card: #FFFFFF;
+  --sage-green: #8BAA91;
+  --sage-light: #E8F0EA;
+  --forest-green: #284C40;
+  --forest-dark: #1B352C;
+  --champagne-gold: #D8B66A;
+  --champagne-light: #F9F1DF;
+  --ink-brown: #4A382D;
+  --ink-muted: #6E5A4F;
+  --border-warm: #E5D7C3;
+  --shadow-soft: 0 12px 32px rgba(40, 76, 64, 0.08);
+  --shadow-gold: 0 14px 36px rgba(216, 182, 106, 0.22);
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --base-font-size: 18px;
+  --transition-speed: 0.45s;
+  --oli-hand-font: 'Dancing Script', 'Charm', 'Playball', cursive;
+  --oli-ink-color: #1E2460;
+}
+
+html {
+  font-size: var(--base-font-size);
+  scroll-behavior: smooth;
+  background-color: var(--bg-ivory);
+  color: var(--ink-brown);
+}
+
+body {
+  font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-ivory);
+  color: var(--ink-brown);
+  line-height: 1.75;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+body.font-lg {
+  --base-font-size: 20px;
+}
+
+body.font-xl {
+  --base-font-size: 22px;
+}
+
+body.reduced-motion *,
+body.reduced-motion *::before,
+body.reduced-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.font-editorial {
+  font-family: 'Playfair Display', 'Noto Serif', Georgia, serif;
+}
+
+.font-handwriting {
+  font-family: 'Dancing Script', 'Charm', cursive;
+}
+
+.font-school-hand {
+  font-family: var(--oli-hand-font);
+}
+
+/* ========================================================================= */
+/* GIẤY VỞ Ô LY CHUẨN TIỂU HỌC & CHỮ VIẾT TAY CÔ GIÁO LUYỆN CHỮ ĐẸP CẤP TỈNH */
+/* Strict Line-by-Line Baseline Grid Lock (40px ô ly lớn / 10px ô ly nhỏ)    */
+/* ========================================================================= */
+.oli-notebook-frame {
+  position: relative;
+  background: #FCFDFE;
+  border: 2.5px solid #2B72A8;
+  border-radius: 14px;
+  box-shadow: 0 14px 36px rgba(24, 62, 94, 0.14), inset 0 0 0 4px #F2F8FC;
+  overflow: hidden;
+}
+
+.oli-corner-ornament {
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.85;
+}
+
+.oli-corner-tl { top: 6px; left: 6px; }
+.oli-corner-tr { top: 6px; right: 6px; transform: scaleX(-1); }
+.oli-corner-bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
+.oli-corner-br { bottom: 6px; right: 6px; transform: scale(-1, -1); }
+
+.oli-writing-canvas {
+  position: relative;
+  background-color: #FCFDFE;
+  /* Lưới vở ô ly 4x4 chuẩn tiểu học: Ô lớn 40px x 40px, chia thành 4 ô nhỏ 10px x 10px */
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 38.5px,
+      rgba(32, 106, 166, 0.62) 38.5px,
+      rgba(32, 106, 166, 0.62) 40px
+    ),
+    repeating-linear-gradient(
+      to right,
+      transparent 0px,
+      transparent 38.5px,
+      rgba(32, 106, 166, 0.40) 38.5px,
+      rgba(32, 106, 166, 0.40) 40px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 9px,
+      rgba(74, 148, 208, 0.25) 9px,
+      rgba(74, 148, 208, 0.25) 10px
+    ),
+    repeating-linear-gradient(
+      to right,
+      transparent 0px,
+      transparent 9px,
+      rgba(74, 148, 208, 0.25) 9px,
+      rgba(74, 148, 208, 0.25) 10px
+    );
+  background-size: 40px 40px, 40px 40px, 10px 10px, 10px 10px;
+  background-position: 0 0;
+  /* Khóa chính xác chân chữ (baseline) nằm thẳng tắp ngay trên đường kẻ ngang đậm 40px */
+  padding-top: 12px !important;
+  padding-bottom: 28px !important;
+  padding-left: 52px !important;
+  padding-right: 32px !important;
+  z-index: 1;
+}
+
+/* Đường kẻ lề đỏ đôi chuẩn vở ô ly tiểu học Việt Nam */
+.oli-writing-canvas::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 38px;
+  width: 3px;
+  border-left: 1.5px solid rgba(218, 62, 82, 0.62);
+  border-right: 1px solid rgba(218, 62, 82, 0.38);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.oli-writing-canvas p {
+  font-family: var(--oli-hand-font) !important;
+  font-size: 25px !important;
+  line-height: 40px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  color: var(--oli-ink-color);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0.4px 0.5px rgba(30, 36, 96, 0.14);
+  position: relative;
+  z-index: 2;
+}
+
+.oli-writing-canvas p.oli-heading {
+  font-size: 27px !important;
+  line-height: 40px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  text-indent: 0 !important;
+  color: #6B1426 !important;
+}
+
+.oli-writing-canvas p.oli-para {
+  text-align: justify !important;
+  text-justify: inter-word;
+  text-indent: 40px !important; /* Lùi đầu dòng đúng 1 ô ly lớn = 4 ô ly nhỏ */
+}
+
+.oli-writing-canvas p.oli-sig-salute {
+  text-align: right !important;
+  text-indent: 0 !important;
+  font-weight: 700 !important;
+  color: #1D4E3E !important;
+  padding-right: 8px !important;
+}
+
+.oli-writing-canvas p.oli-sig-name {
+  text-align: right !important;
+  text-indent: 0 !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  color: #6B1426 !important;
+  padding-right: 8px !important;
+}
+
+.oli-writing-canvas p.oli-sig-brand {
+  text-align: right !important;
+  text-indent: 0 !important;
+  font-size: 23px !important;
+  font-weight: 700 !important;
+  color: var(--oli-ink-color) !important;
+  padding-right: 8px !important;
+}
+
+@media (max-width: 640px) {
+  .oli-writing-canvas {
+    padding-left: 44px !important;
+    padding-right: 16px !important;
+  }
+  .oli-writing-canvas p {
+    font-size: 22px !important;
+    line-height: 40px !important;
+  }
+  .oli-writing-canvas p.oli-heading {
+    font-size: 23px !important;
+    line-height: 40px !important;
+  }
+  .oli-writing-canvas p.oli-para {
+    text-indent: 20px !important;
+  }
+}
+
+/* Khung Chân Dung Tác Giả Trịnh Thị An */
+.author-portrait-card {
+  position: relative;
+  border-radius: 22px;
+  padding: 10px;
+  background: linear-gradient(145deg, #D8B66A 0%, #284C40 50%, #D8B66A 100%);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28), 0 0 0 3px rgba(216, 182, 106, 0.25);
+  cursor: zoom-in;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.author-portrait-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 56px rgba(0, 0, 0, 0.36), 0 0 0 5px rgba(216, 182, 106, 0.42);
+}
+
+/* Hộp trưng bày 4 bức ảnh nghệ thuật gốc của Chị Trịnh Thị An */
+.tta-art-frame {
+  position: relative;
+  background: linear-gradient(145deg, #3A2A1E, #284C40);
+  padding: 12px;
+  border-radius: 20px;
+  border: 2px solid var(--champagne-gold);
+  box-shadow: 0 18px 42px rgba(40, 76, 64, 0.18), 0 0 0 4px rgba(216, 182, 106, 0.18);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+.tta-art-frame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px rgba(40, 76, 64, 0.25), 0 0 0 6px rgba(216, 182, 106, 0.32);
+}
+
+.tta-art-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 640px;
+  object-fit: contain;
+  border-radius: 12px;
+  background-color: #2A1E17;
+  margin: 0 auto;
+}
+
+.tta-art-badge {
+  position: absolute;
+  bottom: 22px;
+  right: 22px;
+  background: rgba(40, 76, 64, 0.92);
+  color: #FFF9EF;
+  border: 1px solid var(--champagne-gold);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+
+/* Hiệu ứng Mở Sách 3D Đặc Biệt (Phần 3) */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: radial-gradient(circle at center, #355E4F 0%, #1B332B 65%, #11221C 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem;
+  overflow-y: auto;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.intro-overlay.hidden-overlay {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.warm-halo {
+  position: absolute;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, rgba(216, 182, 106, 0.28) 0%, rgba(216, 182, 106, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.royal-book-stage {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1180px;
+  perspective: 1800px;
+  margin: auto;
+}
+
+/* Trạng thái Bìa sách đóng */
+.book-closed-cover {
+  max-width: 540px;
+  margin: 0 auto;
+  background: linear-gradient(145deg, #284C40 0%, #1A352C 100%);
+  border: 3px solid var(--champagne-gold);
+  border-left: 18px solid #142922;
+  border-radius: 10px 24px 24px 10px;
+  padding: 2.25rem 2rem;
+  text-align: center;
+  color: #FFF9EF;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.55), inset 0 0 0 2px rgba(216, 182, 106, 0.35);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+}
+
+.book-closed-cover.opening {
+  transform: rotateY(-95deg) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Trạng thái Sách đã mở 2 trang */
+.book-opened-spread {
+  display: grid;
+  grid-template-columns: 0.92fr 1.28fr;
+  background: #FFF9EF;
+  border: 3px solid var(--champagne-gold);
+  border-radius: 18px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  animation: bookSpreadFadeIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes bookSpreadFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) rotateX(6deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+  }
+}
+
+.book-page-left {
+  background: linear-gradient(160deg, #F5EBD6 0%, #FFF9EF 100%);
+  padding: 1.75rem;
+  border-right: 2px solid #E2D2B5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.book-page-right {
+  background-color: #F7EFE1;
+  padding: 1.5rem 1.75rem;
+  color: #3B2B20;
+  position: relative;
+}
+
+@media (max-width: 960px) {
+  .book-opened-spread {
+    grid-template-columns: 1fr;
+  }
+  .book-page-left {
+    border-right: none;
+    border-bottom: 2px solid #E2D2B5;
+    padding: 1.25rem;
+  }
+  .book-page-right {
+    padding: 1.25rem;
+  }
+}
+
+/* Thẻ Sách 3D trong Thư viện */
+.book-card-3d {
+  background: #FFFFFF;
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.book-card-3d:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(40, 76, 64, 0.14);
+  border-color: var(--champagne-gold);
+}
+
+.book-spine-visual {
+  position: relative;
+  border-left: 10px solid rgba(0, 0, 0, 0.28);
+  border-radius: 6px 14px 14px 6px;
+  box-shadow: 6px 8px 20px rgba(0, 0, 0, 0.18), inset -2px 0 6px rgba(255, 255, 255, 0.15);
+}
+
+/* 12 Nút tương tác khám phá sách */
+.node-btn-12 {
+  text-align: left;
+  padding: 0.95rem 1.15rem;
+  border-radius: 14px;
+  border: 1.5px solid var(--border-warm);
+  background: #FFFFFF;
+  color: var(--ink-brown);
+  font-weight: 600;
+  font-size: 0.96rem;
+  transition: all 0.22s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+}
+
+.node-btn-12:hover {
+  border-color: var(--forest-green);
+  background: var(--sage-light);
+  color: var(--forest-green);
+  transform: translateY(-2px);
+}
+
+.node-btn-12.active-node {
+  background: var(--forest-green);
+  color: #FFF9EF;
+  border-color: var(--champagne-gold);
+  box-shadow: 0 8px 20px rgba(40, 76, 64, 0.22);
+}
+
+/* Sơ đồ tư duy (Mindmap) */
+.mindmap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .mindmap-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Thanh điều hướng ghim đỉnh */
+.top-nav-pill {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ink-brown);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.top-nav-pill:hover {
+  background: var(--sage-light);
+  color: var(--forest-green);
+}
+
+.top-nav-pill.active-nav {
+  background: var(--forest-green);
+  color: #FFF9EF;
+  box-shadow: 0 4px 12px rgba(40, 76, 64, 0.2);
+}
+
+/* Lightbox phóng to ảnh */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(18, 28, 24, 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+
+.lightbox-modal.hidden {
+  display: none;
+}

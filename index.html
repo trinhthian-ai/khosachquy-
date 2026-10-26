@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KHO BÁU TRI THỨC – MỘT ĐỜI BIẾT ƠN | Thư Viện Tri Thức An Nhiên AI</title>
+  <meta name="description" content="Thư viện tri thức tương tác An Nhiên AI – Mỗi trang sách mở ra, một chân trời tri thức. Công trình tri ân Thầy Tuấn Tử Tế Từ Tâm (Người Thầy 5T) do Trịnh Thị An sáng lập." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Charm:wght@400;700&family=Dancing+Script:wght@600;700&family=Playball&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="font-lg">
+
+  <!-- Vùng hiển thị thông báo Toast -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-[110] flex flex-col gap-2 max-w-md"></div>
+
+  <!-- Lightbox phóng to 4 bức hình nghệ thuật gốc, Chân dung Tác giả & Hình minh họa -->
+  <div id="lightbox-modal" class="lightbox-modal hidden" onclick="closeLightbox()">
+    <div class="max-w-5xl w-full flex flex-col items-center gap-4" onclick="event.stopPropagation()">
+      <div class="w-full flex items-center justify-between text-[#FFF9EF] px-2">
+        <span class="text-sm md:text-base font-semibold text-[#D8B66A]">✦ Tác phẩm Nghệ thuật &amp; Hình ảnh Nguyên bản – An Nhiên AI — TTA</span>
+        <button type="button" onclick="closeLightbox()" class="px-4 py-1.5 rounded-full bg-[#284C40] border border-[#D8B66A] text-[#FFF9EF] text-sm font-bold cursor-pointer">✕ Đóng chế độ phóng to</button>
+      </div>
+      <div class="bg-[#1B140E] p-3 rounded-2xl border-2 border-[#D8B66A] shadow-2xl max-h-[80vh] flex items-center justify-center overflow-hidden">
+        <img id="lightbox-img" src="assets/images/01.png" alt="Tác phẩm nghệ thuật phóng to" class="max-w-full max-h-[75vh] w-auto h-auto object-contain rounded-xl"/>
+      </div>
+      <p id="lightbox-caption" class="text-center text-sm md:text-base text-[#FFF9EF] max-w-3xl px-4"></p>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- PHẦN 3: TRẢI NGHIỆM MỞ ĐẦU ĐẶC BIỆT (CUỐN SÁCH LỚN & BỨC THƯ VIẾT TAY) -->
+  <!-- ===================================================================== -->
+  <div id="intro-book-overlay" class="intro-overlay">
+    <div class="warm-halo"></div>
+    <div class="royal-book-stage">
+
+      <!-- Trạng thái 1: Bìa sách lớn đặt giữa màn hình trước khi mở -->
+      <div id="book-closed-view" class="book-closed-cover">
+        <div class="border-2 border-[#D8B66A]/60 rounded-xl p-6 md:p-8 space-y-5 bg-gradient-to-b from-[#284C40]/60 to-[#152922]/80">
+          <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-[#D8B66A]/20 border border-[#D8B66A] text-[#D8B66A] text-xs font-bold uppercase tracking-widest">
+            Thư Viện Tri Thức An Nhiên AI
+          </div>
+          <div class="py-2">
+            <h1 class="font-editorial text-3xl md:text-4xl font-bold tracking-wide text-[#FFF9EF] mb-2">
+              KHO BÁU TRI THỨC
+            </h1>
+            <p class="font-editorial text-xl md:text-2xl font-semibold text-[#D8B66A]">
+              MỘT ĐỜI BIẾT ƠN
+            </p>
+          </div>
+
+          <div class="w-24 h-0.5 bg-[#D8B66A] mx-auto"></div>
+
+          <div class="space-y-1">
+            <p class="text-base md:text-lg text-[#FFF9EF]/95 font-medium">
+              Tri ân <strong class="text-[#D8B66A]">Thầy Tuấn Tử Tế Từ Tâm</strong>
+            </p>
+            <p class="text-xs md:text-sm text-[#D8B66A] font-semibold">
+              ✦ Người Thầy "5T" (Tuấn – Tử – Tế – Từ – Tâm) ✦
+            </p>
+          </div>
+
+          <p class="text-xs md:text-sm text-[#E5D7C3] italic">
+            "Mỗi trang sách mở ra – Một chân trời tri thức."
+          </p>
+
+          <!-- Chân dung Tác giả & Người sáng lập ngay trên Bìa sách Tri Ân -->
+          <div class="flex items-center justify-center gap-3.5 p-3 rounded-2xl bg-[#142922]/90 border border-[#D8B66A]/60 text-left max-w-md mx-auto">
+            <img src="assets/images/trinh-thi-an.jpg" alt="Chân dung Tác giả Trịnh Thị An – An Nhiên AI (TTA)" class="w-14 h-14 rounded-xl object-cover border-2 border-[#D8B66A] shrink-0 shadow-md cursor-zoom-in" onclick="openLightbox(this.src, 'Chân dung Tác giả & Người sáng lập: Trịnh Thị An – An Nhiên AI — TTA')"/>
+            <div>
+              <p class="text-[11px] uppercase tracking-wider text-[#D8B66A] font-bold">Người sáng lập &amp; kiến tạo</p>
+              <p class="font-editorial font-bold text-sm md:text-base text-[#FFF9EF]">Trịnh Thị An – An Nhiên AI (TTA)</p>
+              <p class="text-xs text-[#E5D7C3]">Chạm nút bên dưới để mở trang vở ô ly chữ viết tay tri ân</p>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button type="button" onclick="openGratitudeBookSpread()" class="w-full py-4 px-6 rounded-2xl bg-[#D8B66A] hover:bg-[#e3c57b] text-[#284C40] font-bold text-base md:text-lg shadow-xl transition transform hover:scale-[1.02] cursor-pointer">
+              📖 MỞ TRANG SÁCH TRI ÂN
+            </button>
+          </div>
+          <div class="pt-1">
+            <button type="button" onclick="enterLibraryFromIntro()" class="text-xs text-[#E5D7C3] hover:text-[#D8B66A] underline cursor-pointer">
+              Vào thẳng trang chủ thư viện →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trạng thái 2: Cuốn sách mở ra 2 trang (Trang trái nghệ thuật & Chân dung tác giả + Trang phải Bức thư viết tay trên Giấy Ô Ly) -->
+      <div id="book-opened-view" class="book-opened-spread hidden">
+        <!-- Trang bên trái: Hình ảnh nghệ thuật về sách, ánh sáng, tri thức, bức hình tri ân & Chân dung Tác giả Trịnh Thị An -->
+        <div class="book-page-left">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#284C40] text-[#D8B66A]">
+                Trang Trái • Ánh Sáng Tri Thức
+              </span>
+              <button type="button" onclick="resetBookToClosedCover()" class="text-xs font-semibold text-[#4A382D] hover:text-[#284C40] underline cursor-pointer">
+                ← Gấp bìa sách lại
+              </button>
+            </div>
+            <h2 class="font-editorial text-2xl font-bold text-[#284C40]">
+              Món Quà Vô Giá Từ Người Thầy "5T"
+            </h2>
+            <p class="text-sm text-[#4A382D] leading-relaxed">
+              Tri thức được trao tặng – Lòng biết ơn được lan tỏa – Giá trị được nhân lên. Tri ân <strong>Thầy Tuấn Tử Tế Từ Tâm</strong> (Người Thầy "5T"). Nhấn vào tác phẩm hoặc ảnh chân dung bên dưới để phóng to.
+            </p>
+            <div class="tta-art-frame" onclick="openLightbox(document.getElementById('intro-art-01').src, 'Tác phẩm nguyên bản: BIẾT ƠN THẦY TUẤN TỬ TẾ TỪ TÂM – TĂNG TƯƠNG TÁC – TẠO TUYỆT TÁC — Chữ ký T.T.An')">
+              <img id="intro-art-01" src="assets/images/01.png" alt="BIẾT ƠN THẦY TUẤN TỬ TẾ TỪ TÂM – TĂNG TƯƠNG TÁC – TẠO TUYỆT TÁC" class="tta-art-img"/>
+              <span class="tta-art-badge">🔍 Nhấn để phóng to</span>
+            </div>
+          </div>
+
+          <!-- Thẻ Chân Dung Tác Giả & Người Sáng Lập Trịnh Thị An -->
+          <div class="mt-5 p-4 rounded-2xl bg-[#284C40] text-[#FFF9EF] border-2 border-[#D8B66A] shadow-lg flex items-center gap-4">
+            <img id="intro-author-portrait" src="assets/images/trinh-thi-an.jpg" alt="Chân dung Tác giả Trịnh Thị An – An Nhiên AI (TTA)" class="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-cover border-2 border-[#D8B66A] shrink-0 shadow-md cursor-zoom-in" onclick="openLightbox(this.src, 'Chân dung Tác giả & Người sáng lập: Trịnh Thị An – An Nhiên AI — TTA')"/>
+            <div class="space-y-1">
+              <p class="text-xs uppercase tracking-widest text-[#D8B66A] font-bold">Tác giả &amp; Người sáng lập</p>
+              <p class="font-editorial font-bold text-lg text-[#FFF9EF]">Trịnh Thị An – An Nhiên AI (TTA)</p>
+              <p class="text-xs text-[#E5D7C3] leading-snug">
+                Nguồn cảm hứng: Kho sách quý do <strong class="text-[#D8B66A]">Thầy Tuấn Tử Tế Từ Tâm</strong> (Người Thầy "5T") trao tặng.
+              </p>
+              <button type="button" onclick="openLightbox(document.getElementById('intro-author-portrait').src, 'Chân dung Tác giả & Người sáng lập: Trịnh Thị An – An Nhiên AI — TTA')" class="text-[11px] text-[#D8B66A] underline font-semibold cursor-pointer">
+                🔍 Xem ảnh chân dung lớn
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trang bên phải: Bức thư viết tay chuẩn Cô giáo Luyện chữ đẹp cấp Tỉnh thẳng hàng và canh đều trên Giấy Vở Ô Ly -->
+        <div class="book-page-right flex flex-col justify-between">
+          <div>
+            <!-- Thanh tiêu đề & chọn nét bút / màu mực luyện chữ đẹp -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#284C40] text-[#D8B66A] border border-[#D8B66A]">
+                Trang Phải • Chữ Viết Tay Cô Giáo Luyện Chữ Đẹp Trên Giấy Ô Ly
+              </span>
+              <div class="flex flex-wrap items-center gap-1.5 text-xs">
+                <button type="button" onclick="setOliHandwritingStyle('dancing', '#1E2460')" class="px-2.5 py-1 rounded-lg bg-[#1E2460] text-white font-semibold cursor-pointer" title="Nét chữ cô giáo mềm mại - Mực tím tiểu học">✒ Mực Tím Cô Giáo</button>
+                <button type="button" onclick="setOliHandwritingStyle('dancing', '#6B1426')" class="px-2.5 py-1 rounded-lg bg-[#6B1426] text-white font-semibold cursor-pointer" title="Nét chữ cô giáo mềm mại - Mực đỏ rượu vang">✒ Mực Đỏ Nghệ Thuật</button>
+                <button type="button" onclick="setOliHandwritingStyle('charm', '#0F3556')" class="px-2.5 py-1 rounded-lg bg-[#0F3556] text-white font-semibold cursor-pointer" title="Nét bút mài thanh đậm - Mực xanh đen">✒ Nét Thanh Đậm</button>
+              </div>
+            </div>
+
+            <!-- TRANG GIẤY VỞ Ô LY TIỂU HỌC (4x4 Ô Vuông Nhỏ, Đường Kẻ Lề Đỏ, Hoa Văn 4 Góc & Chữ Bám Dòng Kẻ Ngang 100%) -->
+            <div class="oli-notebook-frame">
+              <!-- Hoa văn góc trang vở luyện chữ đẹp -->
+              <svg class="oli-corner-ornament oli-corner-tl" viewBox="0 0 80 80" fill="none">
+                <path d="M6 72 C6 36, 18 14, 72 6" stroke="#4E8A63" stroke-width="2" fill="none"/>
+                <path d="M12 50 C20 36, 36 20, 52 12" stroke="#D96B82" stroke-width="1.5" fill="none"/>
+                <circle cx="22" cy="22" r="9" fill="#F4A7B9" stroke="#C85A70" stroke-width="1.5"/>
+                <circle cx="22" cy="22" r="4" fill="#E87A90"/>
+                <ellipse cx="38" cy="14" rx="6" ry="3" transform="rotate(-25 38 14)" fill="#8BAA91"/>
+                <ellipse cx="14" cy="38" rx="3" ry="6" transform="rotate(-25 14 38)" fill="#8BAA91"/>
+              </svg>
+              <svg class="oli-corner-ornament oli-corner-tr" viewBox="0 0 80 80" fill="none">
+                <path d="M6 72 C6 36, 18 14, 72 6" stroke="#4E8A63" stroke-width="2" fill="none"/>
+                <circle cx="22" cy="22" r="9" fill="#F4A7B9" stroke="#C85A70" stroke-width="1.5"/>
+                <circle cx="22" cy="22" r="4" fill="#E87A90"/>
+                <ellipse cx="38" cy="14" rx="6" ry="3" transform="rotate(-25 38 14)" fill="#8BAA91"/>
+                <ellipse cx="14" cy="38" rx="3" ry="6" transform="rotate(-25 14 38)" fill="#8BAA91"/>
+              </svg>
+              <svg class="oli-corner-ornament oli-corner-bl" viewBox="0 0 80 80" fill="none">
+                <path d="M6 72 C6 36, 18 14, 72 6" stroke="#4E8A63" stroke-width="2" fill="none"/>
+                <circle cx="22" cy="22" r="9" fill="#F4A7B9" stroke="#C85A70" stroke-width="1.5"/>
+                <circle cx="22" cy="22" r="4" fill="#E87A90"/>
+                <ellipse cx="38" cy="14" rx="6" ry="3" transform="rotate(-25 38 14)" fill="#8BAA91"/>
+                <ellipse cx="14" cy="38" rx="3" ry="6" transform="rotate(-25 14 38)" fill="#8BAA91"/>
+              </svg>
+
+              <!-- Vùng lưới ô ly khóa chân chữ thẳng tắp trên đường kẻ ngang 40px và canh đều 2 bên -->
+              <div class="oli-writing-canvas">
+                <p class="oli-heading">Gửi Người Thầy Tôi Luôn Biết Ơn</p>
+                <p class="oli-para">Có những món quà quý giá không thể đo bằng vật chất.</p>
+                <p class="oli-para">Có những người thầy không chỉ trao kiến thức, mà còn mở ra cho học trò những chân trời mới.</p>
+                <p class="oli-para">Tôi may mắn được Thầy Tuấn Tử Tế Từ Tâm trao tặng một kho sách quý, chứa đựng biết bao kiến thức và những bài học sâu sắc.</p>
+                <p class="oli-para">Tôi hiểu rằng, giá trị của một cuốn sách không chỉ nằm ở những trang giấy, mà còn ở những điều tốt đẹp nó có thể khơi dậy trong tâm trí mỗi người.</p>
+                <p class="oli-para">Từ món quà ấy, tôi xây dựng thư viện này với mong muốn được học hỏi, khám phá và lan tỏa những giá trị tri thức đến cộng đồng.</p>
+                <p class="oli-para">Nếu hôm nay, khi bước vào thư viện này, bạn tìm thấy một điều bổ ích, một góc nhìn mới hay một bài học ý nghĩa, xin hãy cùng tôi dành một lời biết ơn đến Thầy Tuấn Tử Tế Từ Tâm.</p>
+                <p class="oli-para">Bởi có những món quà, càng được trân trọng và lan tỏa, càng trở nên vô giá.</p>
+                <p class="oli-sig-salute">Trân trọng và biết ơn!</p>
+                <p class="oli-sig-name">Trịnh Thị An</p>
+                <p class="oli-sig-brand">An Nhiên AI (TTA) — T.T.An</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-[#D8B66A]/60 space-y-2.5">
+            <label class="flex items-center gap-2.5 text-sm text-[#4A382D] cursor-pointer">
+              <input id="skip-intro-checkbox" type="checkbox" class="w-4 h-4 accent-[#284C40] rounded"/>
+              <span>Bỏ qua màn hình mở sách giới thiệu ở những lần truy cập tiếp theo (Bạn luôn có thể mở lại bất cứ lúc nào).</span>
+            </label>
+            <button type="button" onclick="enterLibraryFromIntro()" class="w-full py-3.5 px-6 rounded-2xl bg-[#284C40] hover:bg-[#1B352C] text-[#FFF9EF] font-bold text-base md:text-lg shadow-lg border-2 border-[#D8B66A] transition cursor-pointer">
+              ✨ BƯỚC VÀO KHO TÀNG TRI THỨC →
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- THANH CÔNG CỤ TRỢ NĂNG (CHỮ LỚN CHO NGƯỜI TRUNG NIÊN/LỚN TUỔI) & HEADER -->
+  <!-- ===================================================================== -->
+  <div class="bg-[#284C40] text-[#FFF9EF] border-b border-[#D8B66A]/40 text-xs md:text-sm py-2 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="text-[#D8B66A] font-bold">✦ KHO BÁU TRI THỨC – MỘT ĐỜI BIẾT ƠN</span>
+        <span class="hidden md:inline text-[#E5D7C3]">| Tri ân Thầy Tuấn Tử Tế Từ Tâm (Người Thầy "5T")</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <button type="button" onclick="reopenGratitudeBookModal()" class="px-2.5 py-1 rounded-lg bg-[#D8B66A] text-[#284C40] font-bold cursor-pointer">
+          📖 Mở lại Sách Tri Ân &amp; Trang Vở Ô Ly
+        </button>
+        <button type="button" onclick="cycleFontSize()" class="px-2.5 py-1 rounded-lg bg-white/15 hover:bg-white/25 text-[#FFF9EF] font-semibold cursor-pointer">
+          🔍 <span id="font-size-label">Cỡ chữ: Lớn (Đang bật)</span>
+        </button>
+        <button type="button" id="reduced-motion-btn" onclick="toggleReducedMotion()" class="px-2.5 py-1 rounded-lg bg-white/15 hover:bg-white/25 text-[#FFF9EF] font-semibold cursor-pointer">
+          Chuyển động: Mượt mà
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHẦN 5: THANH ĐIỀU HƯỚNG 10 MỤC CHUẨN -->
+  <header class="sticky top-0 z-50 bg-[#FFF9EF]/95 backdrop-blur-md border-b border-[#E5D7C3] shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="navigateToSection('trang-chu')">
+        <img src="assets/images/trinh-thi-an.jpg" alt="Trịnh Thị An – An Nhiên AI (TTA)" class="w-11 h-11 rounded-2xl object-cover border-2 border-[#D8B66A] shrink-0 shadow-sm"/>
+        <div>
+          <span class="font-editorial font-bold text-base md:text-lg text-[#284C40] block leading-tight">KHO BÁU TRI THỨC</span>
+          <span class="text-xs text-[#6E5A4F] block">Thư Viện Tri Thức An Nhiên AI • Trịnh Thị An</span>
+        </div>
+      </div>
+
+      <!-- Menu máy tính (10 mục) -->
+      <nav class="hidden xl:flex items-center gap-1 overflow-x-auto py-1" aria-label="Điều hướng chính">
+        <button type="button" data-target="trang-chu" onclick="navigateToSection('trang-chu')" class="top-nav-pill active-nav">1. Trang chủ</button>
+        <button type="button" data-target="loi-tri-an" onclick="navigateToSection('loi-tri-an')" class="top-nav-pill">2. Lời tri ân</button>
+        <button type="button" data-target="kho-bau-sach" onclick="navigateToSection('kho-bau-sach')" class="top-nav-pill">3. Kho báu sách</button>
+        <button type="button" data-target="kham-pha-tri-thuc" onclick="navigateToSection('kham-pha-tri-thuc')" class="top-nav-pill">4. Khám phá tri thức</button>
+        <button type="button" data-target="sach-hay-nen-doc" onclick="navigateToSection('sach-hay-nen-doc')" class="top-nav-pill">5. Sách hay nên đọc</button>
+        <button type="button" data-target="nghien-cuu-chuyen-sau" onclick="navigateToSection('nghien-cuu-chuyen-sau')" class="top-nav-pill">6. Nghiên cứu chuyên sâu</button>
+        <button type="button" data-target="goc-hoc-tap" onclick="navigateToSection('goc-hoc-tap')" class="top-nav-pill">7. Góc học tập</button>
+        <button type="button" data-target="am-nhac-an-nhien" onclick="navigateToSection('am-nhac-an-nhien')" class="top-nav-pill">8. Âm nhạc An Nhiên</button>
+        <button type="button" data-target="website-kien-tao" onclick="navigateToSection('website-kien-tao')" class="top-nav-pill">9. Website đã kiến tạo</button>
+        <button type="button" data-target="gioi-thieu-ket-noi" onclick="navigateToSection('gioi-thieu-ket-noi')" class="top-nav-pill">10. Giới thiệu – Kết nối</button>
+      </nav>
+
+      <!-- Nút mở menu trên điện thoại & máy tính bảng -->
+      <button type="button" onclick="toggleMobileMenu()" class="xl:hidden px-3.5 py-2 rounded-xl bg-[#284C40] text-[#FFF9EF] font-semibold text-sm flex items-center gap-2 cursor-pointer">
+        <span>☰ Danh mục (10)</span>
+      </button>
+    </div>
+
+    <!-- Ngăn kéo Menu cho Điện thoại -->
+    <div id="mobile-nav-drawer" class="hidden xl:hidden bg-[#FFF9EF] border-t border-[#E5D7C3] px-4 py-4">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+        <button type="button" onclick="navigateToSection('trang-chu')" class="top-nav-pill text-left">1. Trang chủ</button>
+        <button type="button" onclick="navigateToSection('loi-tri-an')" class="top-nav-pill text-left">2. Lời tri ân</button>
+        <button type="button" onclick="navigateToSection('kho-bau-sach')" class="top-nav-pill text-left">3. Kho báu sách</button>
+        <button type="button" onclick="navigateToSection('kham-pha-tri-thuc')" class="top-nav-pill text-left">4. Khám phá tri thức</button>
+        <button type="button" onclick="navigateToSection('sach-hay-nen-doc')" class="top-nav-pill text-left">5. Sách hay nên đọc</button>
+        <button type="button" onclick="navigateToSection('nghien-cuu-chuyen-sau')" class="top-nav-pill text-left">6. Nghiên cứu chuyên sâu</button>
+        <button type="button" onclick="navigateToSection('goc-hoc-tap')" class="top-nav-pill text-left">7. Góc học tập</button>
+        <button type="button" onclick="navigateToSection('am-nhac-an-nhien')" class="top-nav-pill text-left">8. Âm nhạc An Nhiên</button>
+        <button type="button" onclick="navigateToSection('website-kien-tao')" class="top-nav-pill text-left">9. Website đã kiến tạo</button>
+        <button type="button" onclick="navigateToSection('gioi-thieu-ket-noi')" class="top-nav-pill text-left">10. Giới thiệu – Kết nối</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-20">
+
+    <!-- =================================================================== -->
+    <!-- MỤC 1: TRANG CHỦ (KHU VỰC A, B, C, D, E)                            -->
+    <!-- =================================================================== -->
+    <section id="trang-chu" class="space-y-14 scroll-mt-24">
+      <!-- Khu vực A: Banner chính -->
+      <div class="rounded-3xl bg-gradient-to-br from-[#284C40] via-[#1F3D33] to-[#3A2C22] text-[#FFF9EF] p-8 md:p-12 border-2 border-[#D8B66A] shadow-2xl relative overflow-hidden">
+        <div class="grid lg:grid-cols-12 gap-8 items-center relative z-10">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#D8B66A]/20 border border-[#D8B66A] text-[#D8B66A] text-xs font-bold uppercase tracking-widest">
+              <span>Luxury Editorial Library &amp; Interactive Knowledge Museum</span>
+            </div>
+            <h2 class="font-editorial text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-[#FFF9EF]">
+              MỘT CUỐN SÁCH – <span class="text-[#D8B66A]">NGÀN ĐIỀU KHÁM PHÁ</span>
+            </h2>
+            <p class="text-lg md:text-xl text-[#F7EFE1] font-editorial italic">
+              "Mỗi trang sách mở ra – Một chân trời tri thức."
+            </p>
+            <p class="text-base text-[#FFF9EF]/90 leading-relaxed">
+              Chào mừng bạn đến với <strong>Kho Báu Tri Thức – Một Đời Biết Ơn</strong> do <strong>Trịnh Thị An – An Nhiên AI — TTA</strong> sáng lập và xây dựng từ nguồn cảm hứng kho sách quý của <strong>Thầy Tuấn Tử Tế Từ Tâm</strong> (Người Thầy "5T"). Tại đây, mỗi cuốn sách là một không gian nghiên cứu tương tác có chiều sâu giúp bạn ứng dụng tri thức để thay đổi cuộc sống.
+            </p>
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <button type="button" onclick="navigateToSection('kham-pha-tri-thuc')" class="px-6 py-3.5 rounded-2xl bg-[#D8B66A] hover:bg-[#e3c57b] text-[#284C40] font-bold text-base shadow-lg transition cursor-pointer">
+                🚀 KHÁM PHÁ NGAY
+              </button>
+              <button type="button" onclick="reopenGratitudeBookModal()" class="px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-[#FFF9EF] border border-[#D8B66A] font-semibold text-base transition cursor-pointer">
+                📜 Đọc Thư Viết Tay Tri Ân Thầy Tuấn Tử Tế Từ Tâm
+              </button>
+            </div>
+          </div>
+
+          <!-- Chân dung Tác giả Trịnh Thị An & Giá trị cốt lõi của Thư viện -->
+          <div class="lg:col-span-5 space-y-4">
+            <div class="p-5 rounded-2xl bg-[#FFF9EF] text-[#4A382D] border-2 border-[#D8B66A] shadow-xl space-y-4">
+              <div class="flex items-center gap-4 border-b border-[#E5D7C3] pb-4">
+                <img id="hero-author-img" src="assets/images/trinh-thi-an.jpg" alt="Tác giả Trịnh Thị An – Người sáng lập Thư viện Tri thức An Nhiên AI" class="w-20 h-20 rounded-2xl object-cover border-2 border-[#284C40] shadow-md shrink-0 cursor-zoom-in" onclick="openLightbox(this.src, 'Chân dung Tác giả & Người sáng lập: Trịnh Thị An – An Nhiên AI — TTA')"/>
+                <div>
+                  <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#E8F0EA] text-[#284C40]">Người sáng lập &amp; Tác giả</span>
+                  <h3 class="font-editorial font-bold text-xl text-[#284C40] mt-1">Trịnh Thị An</h3>
+                  <p class="text-xs font-semibold text-[#6E5A4F]">Thương hiệu: An Nhiên AI — TTA</p>
+                  <button type="button" onclick="navigateToSection('gioi-thieu-ket-noi')" class="text-xs font-bold text-[#284C40] underline mt-0.5 cursor-pointer">Xem hồ sơ tác giả &amp; kết nối →</button>
+                </div>
+              </div>
+              <ul class="space-y-2 text-sm md:text-base">
+                <li class="flex items-start gap-2.5">
+                  <span class="text-[#284C40] font-bold">✦</span>
+                  <span><strong>Tri thức được trao tặng:</strong> Tri ân món quà sách quý từ <strong>Thầy Tuấn Tử Tế Từ Tâm</strong> — Người Thầy "5T".</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-[#284C40] font-bold">✦</span>
+                  <span><strong>Lòng biết ơn được lan tỏa:</strong> Biến sách hay thành bài phân tích, sơ đồ tư duy và hướng dẫn thực hành dễ hiểu.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-[#284C40] font-bold">✦</span>
+                  <span><strong>Phi thương mại &amp; Tôn trọng bản quyền:</strong> Không phát tán file PDF có bản quyền, bảo vệ tuyệt đối kho nguồn riêng.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Khu vực B: Kho sách nổi bật -->
+      <div class="space-y-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-[#E5D7C3] pb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-[#284C40] bg-[#E8F0EA] px-3 py-1 rounded-full">Khu vực B • Tinh hoa chọn lọc</span>
+            <h2 class="font-editorial text-2xl md:text-3xl font-bold text-[#284C40] mt-2">Kho Sách Nổi Bật Trong Thư Viện</h2>
+          </div>
+          <button type="button" onclick="navigateToSection('kho-bau-sach')" class="text-sm font-bold text-[#284C40] hover:underline cursor-pointer">
+            Xem toàn bộ danh mục sách →
+          </button>
+        </div>
+        <div id="featured-books-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+
+      <!-- Khu vực C: Bạn muốn tìm hiểu điều gì? (10 Nhóm kiến thức theo mục tiêu) -->
+      <div class="space-y-6">
+        <div class="border-b-2 border-[#E5D7C3] pb-4">
+          <span class="text-xs font-bold uppercase tracking-widest text-[#284C40] bg-[#E8F0EA] px-3 py-1 rounded-full">Khu vực C • Định hướng mục tiêu học tập</span>
+          <h2 class="font-editorial text-2xl md:text-3xl font-bold text-[#284C40] mt-2">Bạn Muốn Tìm Hiểu Điều Gì Hôm Nay?</h2>
+          <p class="text-base text-[#6E5A4F] mt-1">Chọn một trong 10 nhóm tri thức dưới đây để lọc ngay những cuốn sách giúp giải quyết mục tiêu của bạn.</p>
+        </div>
+        <div id="goal-categories-grid" class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4"></div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- MỤC 2 & KHU VỰC E: LỜI TRI ÂN THẦY TUẤN TỬ TẾ TỪ TÂM (NGƯỜI THẦY 5T)-->
+    <!-- Tích hợp Bức hình 01.png, TRANG BÌA ĐẦU.png & Trang Vở Ô Ly Chữ Đẹp -->
+    <!-- =================================================================== -->
+    <section id="loi-tri-an" class="space-y-12 scroll-mt-24">
+      <div class="rounded-3xl bg-gradient-to-br from-[#FFF9EF] to-[#F5EBD6] border-2 border-[#D8B66A] p-6 md:p-10 shadow-xl space-y-10">
+        <div class="text-center max-w-3xl mx-auto space-y-3">
+          <span class="px-4 py-1 rounded-full bg-[#284C40] text-[#D8B66A] text-xs font-bold uppercase tracking-widest">
+            Khu vực E &amp; Chuyên mục Lời Tri Ân Người Thầy "5T"
+          </span>
+          <h2 class="font-editorial text-3xl md:text-4xl font-bold text-[#284C40]">
+            Tri Ân Thầy Tuấn Tử Tế Từ Tâm
+          </h2>
+          <p class="text-sm md:text-base font-bold text-[#284C40]">
+            ✦ Người Thầy "5T": Tuấn – Tử – Tế – Từ – Tâm ✦
+          </p>
+          <p class="text-base md:text-lg text-[#4A382D]">
+            "TRI THỨC ĐƯỢC TRAO TẶNG – LÒNG BIẾT ƠN ĐƯỢC LAN TỎA – GIÁ TRỊ ĐƯỢC NHÂN LÊN."
+          </p>
+        </div>
+
+        <!-- YÊU CẦU 5: Hình “BIẾT ƠN THẦY TUẤN TỬ TẾ TỪ TÂM – TĂNG TƯƠNG TÁC – TẠO TUYỆT TÁC” xuất hiện nổi bật tại trang tri ân -->
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7">
+            <div class="tta-art-frame" onclick="openLightbox(document.getElementById('main-art-01').src, 'Tác phẩm nghệ thuật tại Trang Tri Ân: BIẾT ƠN THẦY TUẤN TỬ TẾ TỪ TÂM – TĂNG TƯƠNG TÁC – TẠO TUYỆT TÁC — Chữ ký T.T.An')">
+              <img id="main-art-01" src="assets/images/01.png" alt="BIẾT ƠN THẦY TUẤN TỬ TẾ TỪ TÂM – TĂNG TƯƠNG TÁC – TẠO TUYỆT TÁC" class="tta-art-img"/>
+              <span class="tta-art-badge">🔍 Nhấn để xem ảnh lớn nguyên bản</span>
+            </div>
+            <p class="text-xs md:text-sm text-center text-[#6E5A4F] mt-2 italic">
+              Tác phẩm chữ nghệ thuật nguyên bản: "Biết ơn Thầy Tuấn Tử Tế Từ Tâm – Tăng Tương Tác – Tạo Tuyệt Tác" — Chữ ký T.T.An.
+            </p>
+          </div>
+
+          <div class="lg:col-span-5 space-y-4">
+            <div class="p-6 rounded-2xl bg-white border border-[#D8B66A] shadow-sm space-y-4">
+              <div class="flex items-center gap-3.5 pb-3 border-b border-[#E5D7C3]">
+                <img src="assets/images/trinh-thi-an.jpg" alt="Tác giả Trịnh Thị An" class="w-16 h-16 rounded-2xl object-cover border-2 border-[#D8B66A] shrink-0 cursor-zoom-in" onclick="openLightbox(this.src, 'Chân dung Tác giả & Người sáng lập: Trịnh Thị An – An Nhiên AI — TTA')"/>
+                <div>
+                  <span class="text-xs font-bold uppercase tracking-wider text-[#284C40]">Lời Tri Ân Từ Học Trò</span>
+                  <h3 class="font-editorial text-xl font-bold text-[#284C40]">Trịnh Thị An – An Nhiên AI</h3>
+                </div>
+              </div>
+              <p class="text-base text-[#4A382D] leading-relaxed">
+                Có những món quà khi trao đi không chỉ dừng lại ở người nhận, mà trở thành hạt giống nảy mầm thành cả một khu rừng tri thức. Kho sách quý do <strong>Thầy Tuấn Tử Tế Từ Tâm</strong> (Người Thầy "5T") trao tặng cho <strong>Trịnh Thị An</strong> chính là một món quà như thế.
+              </p>
+              <p class="text-base text-[#4A382D] leading-relaxed">
+                Thư viện này được kiến tạo không nhằm mục đích thương mại, mà là lời tri ân sâu sắc nhất: đọc thật sâu, hiểu thật kỹ và biến tinh hoa trong từng trang sách thành những bài học ứng dụng giúp ích cho cộng đồng.
+              </p>
+              <div class="pt-1">
+                <button type="button" onclick="reopenGratitudeBookModal()" class="w-full py-3 px-5 rounded-xl bg-[#284C40] hover:bg-[#1B352C] text-[#FFF9EF] font-bold text-sm transition cursor-pointer">
+                  📖 Mở Hiệu Ứng Lật Sách &amp; Trang Vở Ô Ly Tri Ân
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BỨC THƯ VIẾT TAY CÔ GIÁO LUYỆN CHỮ ĐẸP CẤP TỈNH TRÊN GIẤY VỞ Ô LY (Hiển thị trực tiếp tại Mục Lời Tri Ân) -->
+        <div class="pt-8 border-t-2 border-[#E5D7C3] space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <span class="px-3 py-1 rounded-full bg-[#284C40] text-[#D8B66A] text-xs font-bold uppercase tracking-wider">
+                Trang Vở Ô Ly Luyện Chữ Đẹp Cấp Tỉnh • Chữ Thẳng Hàng &amp; Canh Đều Trên Ô Ly Giấy
+              </span>
+              <h3 class="font-editorial text-2xl md:text-3xl font-bold text-[#284C40] mt-2">
+                Bức Thư Viết Tay Tri Ân Thầy Tuấn Tử Tế Từ Tâm
+              </h3>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+              <button type="button" onclick="setOliHandwritingStyle('dancing', '#1E2460')" class="px-3 py-1.5 rounded-xl bg-[#1E2460] text-white font-bold cursor-pointer">✒ Mực Tím Cô Giáo</button>
+              <button type="button" onclick="setOliHandwritingStyle('dancing', '#6B1426')" class="px-3 py-1.5 rounded-xl bg-[#6B1426] text-white font-bold cursor-pointer">✒ Mực Đỏ Nghệ Thuật</button>
+              <button type="button" onclick="setOliHandwritingStyle('charm', '#0F3556')" class="px-3 py-1.5 rounded-xl bg-[#0F3556] text-white font-bold cursor-pointer">✒ Nét Thanh Đậm</button>
+            </div>
+          </div>
+
+          <div class="max-w-4xl mx-auto oli-notebook-frame">
+            <svg class="oli-corner-ornament oli-corner-tl" viewBox="0 0 80 80" fill="none">
+              <path d="M6 72 C6 36, 18 14, 72 6" stroke="#4E8A63" stroke-width="2" fill="none"/>
+              <circle cx="22" cy="22" r="9" fill="#F4A7B9" stroke="#C85A70" stroke-width="1.5"/>
+              <circle cx="22" cy="22" r="4" fill="#E87A90"/>
+              <ellipse cx="38" cy="14" rx="6" ry="3" transform="rotate(-25 38 14)" fill="#8BAA91"/>
+              <ellipse cx="14" cy="38" rx="3" ry="6" transform="rotate(-25 14 38)" fill="#8BAA91"/>
+            </svg>
+            <svg class="oli-corner-ornament oli-corner-tr" viewBox="0 0 80 80" fill="none">
+              <path d="M6 72 C6 36, 18 14, 72 6" stroke="#4E8A63" stroke-width="2" fill="none"/>
+              <circle cx="22" cy="22" r="9" fill="#F4A7B9" stroke="#C85A70" stroke-width="1.5"/>
+              <circle cx="22" cy="22" r="4" fill="#E87A90"/>
+              <ellipse cx="38" cy="14" rx="6" ry="3" transform="rotate(-25 38 14)" fill="#8BAA91"/>
+              <ellipse cx="14" cy="38" rx="3" ry="6" transform="rotate(-25 14 38)" fill="#8BAA91"/>
+            </svg>
+            <svg class="oli-corner-ornament oli-corner-bl" viewBox="0 0 80 80" fill="none">
+              <path d="M6 72 C6 36, 18 14, 72 6" stroke="#4E8A63" stroke-width="2" fill="none"/>
+              <circle cx="22" cy="22" r="9" fill="#F4A7B9" stroke="#C85A70" stroke-width="1.5"/>
+              <circle cx="22" cy="22" r="4" fill="#E87A90"/>
+              <ellipse cx="38" cy="14" rx="6" ry="3" transform="rotate(-25 38 14)" fill="#8BAA91"/>
+              <ellipse cx="14" cy="38" rx="3" ry="6" transform="rotate(-25 14 38)" fill="#8BAA91"/>
+            </svg>
+
+            <div class="oli-writing-canvas">
+              <p class="oli-heading">Gửi Người Thầy Tôi Luôn Biết Ơn</p>
+              <p class="oli-para">Có những món quà quý giá không thể đo bằng vật chất.</p>
+              <p class="oli-para">Có những người thầy không chỉ trao kiến thức, mà còn mở ra cho học trò những chân trời mới.</p>
+              <p class="oli-para">Tôi may mắn được Thầy Tuấn Tử Tế Từ Tâm trao tặng một kho sách quý, chứa đựng biết bao kiến thức và những bài học sâu sắc.</p>
+              <p class="oli-para">Tôi hiểu rằng, giá trị của một cuốn sách không chỉ nằm ở những trang giấy, mà còn ở những điều tốt đẹp nó có thể khơi dậy trong tâm trí mỗi người.</p>
+              <p class="oli-para">Từ món quà ấy, tôi xây dựng thư viện này với mong muốn được học hỏi, khám phá và lan tỏa những giá trị tri thức đến cộng đồng.</p>
+              <p class="oli-para">Nếu hôm nay, khi bước vào thư viện này, bạn tìm thấy một điều bổ ích, một góc nhìn mới hay một bài học ý nghĩa, xin hãy cùng tôi dành một lời biết ơn đến Thầy Tuấn Tử Tế Từ Tâm.</p>
+              <p class="oli-para">Bởi có những món quà, càng được trân trọng và lan tỏa, càng trở nên vô giá.</p>
+              <p class="oli-sig-salute">Trân trọng và biết ơn!</p>
+              <p class="oli-sig-name">Trịnh Thị An</p>
+              <p class="oli-sig-brand">An Nhiên AI (TTA) — T.T.An</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- YÊU CẦU 3: Hình “MỘT LẦN KIẾN TẠO – VẠN ĐỜI NỞ HOA” đưa vào trang giới thiệu hành trình kiến tạo thư viện -->
+        <div class="pt-8 border-t-2 border-[#E5D7C3] grid lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-5 space-y-4 order-2 lg:order-1">
+            <span class="px-3 py-1 rounded-full bg-[#E8F0EA] text-[#284C40] text-xs font-bold uppercase tracking-wider">
+              Hành Trình Kiến Tạo Thư Viện
+            </span>
+            <h3 class="font-editorial text-2xl md:text-3xl font-bold text-[#284C40]">
+              Một Lần Kiến Tạo – Vạn Đời Nở Hoa
+            </h3>
+            <p class="text-base text-[#4A382D] leading-relaxed">
+              Hành trình xây dựng <strong>Thư Viện Tri Thức An Nhiên AI</strong> bắt đầu từ trăn trở của <strong>Trịnh Thị An</strong>: Làm sao để một cuốn sách quý từ kho sách của <strong>Thầy Tuấn Tử Tế Từ Tâm</strong> không chỉ nằm yên trong thư mục lưu trữ, mà trở thành người bạn đồng hành dễ hiểu, gần gũi với mọi lứa tuổi — kể cả các cô chú trung niên và người lớn tuổi?
+            </p>
+            <ul class="space-y-2 text-sm md:text-base text-[#4A382D]">
+              <li>✦ <strong>Chuyển hóa chiều sâu:</strong> Mỗi cuốn sách được mở ra thành 12 chiều khám phá, có tình huống thực tế và sơ đồ tư duy.</li>
+              <li>✦ <strong>Chuẩn mực &amp; Bền vững:</strong> Kiến tạo một nền tảng tri thức số chuẩn mực để giá trị tốt đẹp tiếp tục lan tỏa mãi về sau.</li>
+            </ul>
+          </div>
+
+          <div class="lg:col-span-7 order-1 lg:order-2">
+            <div class="tta-art-frame" onclick="openLightbox(document.getElementById('main-art-bia-dau').src, 'Tác phẩm nghệ thuật Hành trình kiến tạo: MỘT LẦN KIẾN TẠO – VẠN ĐỜI NỞ HOA — An Nhiên AI')">
+              <img id="main-art-bia-dau" src="assets/images/trang-bia-dau.png" alt="MỘT LẦN KIẾN TẠO – VẠN ĐỜI NỞ HOA — An Nhiên AI" class="tta-art-img"/>
+              <span class="tta-art-badge">🔍 Nhấn để xem ảnh lớn nguyên bản</span>
+            </div>
+            <p class="text-xs md:text-sm text-center text-[#6E5A4F] mt-2 italic">
+              Tác phẩm nghệ thuật nguyên bản: "Một Lần Kiến Tạo – Vạn Đời Nở Hoa — An Nhiên AI".
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- MỤC 3: KHO BÁU SÁCH (DANH MỤC, TÌM KIẾM & BỘ LỌC)                   -->
+    <!-- =================================================================== -->
+    <section id="kho-bau-sach" class="space-y-8 scroll-mt-24">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-[#E5D7C3] pb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-[#284C40] bg-[#E8F0EA] px-3 py-1 rounded-full">Phần 6 • Hệ thống Danh mục Kho sách</span>
+          <h2 class="font-editorial text-3xl font-bold text-[#284C40] mt-2">Kho Báu Sách &amp; Hồ Sơ Tri Thức</h2>
+          <p id="catalog-count-banner" class="text-sm md:text-base text-[#6E5A4F] mt-1"></p>
+        </div>
+        <button type="button" onclick="resetCatalogFilters()" class="px-4 py-2 rounded-xl border border-[#284C40] text-[#284C40] text-sm font-semibold self-start md:self-auto cursor-pointer">
+          Làm mới bộ lọc
+        </button>
+      </div>
+
+      <!-- Thanh công cụ Tìm kiếm & Lọc -->
+      <div class="p-5 rounded-2xl bg-white border border-[#E5D7C3] shadow-sm grid md:grid-cols-12 gap-4">
+        <div class="md:col-span-5">
+          <label for="catalog-search-input" class="block text-xs font-bold uppercase text-[#6E5A4F] mb-1">Tìm theo tên sách, tác giả hoặc chủ đề</label>
+          <input id="catalog-search-input" type="text" oninput="handleCatalogSearchInput(this.value)" placeholder="Ví dụ: Robin Sharma, Enzyme, Giao tiếp, Steve Jobs..." class="w-full px-4 py-2.5 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-base focus:outline-none focus:border-[#284C40]"/>
+        </div>
+        <div class="md:col-span-4">
+          <label for="catalog-category-filter" class="block text-xs font-bold uppercase text-[#6E5A4F] mb-1">Lọc theo 10 nhóm mục tiêu</label>
+          <select id="catalog-category-filter" onchange="handleCatalogCategoryChange(this.value)" class="w-full px-4 py-2.5 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-base focus:outline-none focus:border-[#284C40]"></select>
+        </div>
+        <div class="md:col-span-3">
+          <label for="catalog-status-filter" class="block text-xs font-bold uppercase text-[#6E5A4F] mb-1">Trạng thái biên soạn</label>
+          <select id="catalog-status-filter" onchange="handleCatalogStatusChange(this.value)" class="w-full px-4 py-2.5 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-base focus:outline-none focus:border-[#284C40]">
+            <option value="all">Tất cả trạng thái</option>
+            <option value="verified">✓ Đã biên soạn &amp; kiểm duyệt (12/12)</option>
+            <option value="pending">⏳ Đang chờ biên soạn &amp; duyệt</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="catalog-books-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- MỤC 4: TRANG KHÁM PHÁ MỖI CUỐN SÁCH – CHỨC NĂNG TRUNG TÂM (PHẦN 7 & 9)-->
+    <!-- =================================================================== -->
+    <section id="kham-pha-tri-thuc" class="space-y-8 scroll-mt-24">
+      <div class="rounded-3xl bg-[#284C40] text-[#FFF9EF] p-6 md:p-9 border-2 border-[#D8B66A] shadow-xl space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-white/15">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-[#D8B66A]">Phần 7 • Chức năng Trung tâm của Bách Khoa Tri Thức</span>
+            <h2 class="font-editorial text-2xl md:text-3xl font-bold text-[#FFF9EF] mt-1">Không Gian Khám Phá Chuyên Sâu Từng Cuốn Sách</h2>
+          </div>
+          <div class="w-full md:w-96">
+            <label for="explorer-book-selector" class="block text-xs text-[#D8B66A] font-semibold mb-1">Đổi cuốn sách đang nghiên cứu:</label>
+            <select id="explorer-book-selector" onchange="openBookExplorer(this.value, false)" class="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9EF] text-[#284C40] font-bold text-sm border border-[#D8B66A]"></select>
+          </div>
+        </div>
+
+        <div id="explorer-welcome-header"></div>
+      </div>
+
+      <!-- 12 NÚT TƯƠNG TÁC KHÁM PHÁ -->
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h3 class="font-editorial text-2xl font-bold text-[#284C40]">
+            BẠN MUỐN KHÁM PHÁ ĐIỀU GÌ TỪ CUỐN SÁCH NÀY? (12 Chiều Sâu Tri Thức)
+          </h3>
+          <span class="text-xs md:text-sm text-[#6E5A4F]">Nhấn vào từng nút bên dưới để đọc nội dung phân tích ngay tại chỗ</span>
+        </div>
+        <div id="explorer-12-buttons-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+      </div>
+
+      <!-- Khung hiển thị nội dung chi tiết của nút đang chọn -->
+      <div id="explorer-node-detail-box"></div>
+
+      <!-- Sơ đồ tư duy & Hình minh họa theo chủ đề sách -->
+      <div class="grid lg:grid-cols-12 gap-6 items-start">
+        <div class="lg:col-span-7 space-y-3">
+          <h4 class="font-editorial text-xl font-bold text-[#284C40]">🧠 Sơ Đồ Tư Duy Hệ Thống Hóa Cuốn Sách</h4>
+          <div id="explorer-mindmap-box"></div>
+        </div>
+        <div class="lg:col-span-5 space-y-3">
+          <h4 class="font-editorial text-xl font-bold text-[#284C40]">🎨 Hình Minh Họa Chủ Đề Giáo Dục</h4>
+          <div id="explorer-illustration-box"></div>
+        </div>
+      </div>
+
+      <!-- PHẦN 9: TÍNH NĂNG NGƯỜI ĐỌC CHỌN VẤN ĐỀ NGHIÊN CỨU -->
+      <div class="p-6 md:p-8 rounded-3xl bg-white border-2 border-[#E5D7C3] shadow-md space-y-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-[#284C40] bg-[#E8F0EA] px-3 py-1 rounded-full">Phần 9 • Nghiên cứu ứng dụng theo vấn đề</span>
+          <h3 class="font-editorial text-2xl font-bold text-[#284C40] mt-2">BẠN ĐANG MUỐN TÌM CÂU TRẢ LỜI CHO VẤN ĐỀ GÌ?</h3>
+          <p class="text-sm md:text-base text-[#6E5A4F]">Chọn một câu hỏi thực tế đã được biên soạn dưới đây hoặc nhập vấn đề của bạn để đối chiếu với dữ liệu xác thực của cuốn sách.</p>
+        </div>
+
+        <div id="explorer-problems-panel"></div>
+
+        <!-- Ô nhập câu hỏi đối chiếu dữ liệu đã duyệt -->
+        <div class="pt-4 border-t border-[#E5D7C3]">
+          <label for="custom-problem-input" class="block text-sm font-bold text-[#284C40] mb-2">
+            Tra cứu nhanh vấn đề của bạn trong hồ sơ đã duyệt của cuốn sách này:
+          </label>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input id="custom-problem-input" type="text" placeholder="Nhập từ khóa hoặc câu hỏi (Ví dụ: lắng nghe, kỷ luật, sức khỏe, lãnh đạo...)" class="flex-1 px-4 py-2.5 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-base"/>
+            <button type="button" onclick="handleCustomQuestionLookup()" class="px-5 py-2.5 rounded-xl bg-[#284C40] text-[#FFF9EF] font-bold text-sm cursor-pointer">
+              🔍 Đối chiếu từ sách đã duyệt
+            </button>
+          </div>
+          <div id="custom-problem-answer" class="hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- MỤC 5 & KHU VỰC D: SÁCH HAY NÊN ĐỌC & MỖI TUẦN MỘT CUỐN SÁCH        -->
+    <!-- =================================================================== -->
+    <section id="sach-hay-nen-doc" class="space-y-8 scroll-mt-24">
+      <div class="rounded-3xl bg-gradient-to-r from-[#284C40] to-[#1F3A32] text-[#FFF9EF] p-6 md:p-10 border-2 border-[#D8B66A] shadow-xl">
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-8 space-y-4">
+            <span class="px-3 py-1 rounded-full bg-[#D8B66A] text-[#284C40] text-xs font-bold uppercase tracking-wider">
+              Khu vực D • Chuyên mục Mỗi Tuần Một Cuốn Sách
+            </span>
+            <h2 class="font-editorial text-3xl font-bold text-[#FFF9EF]">
+              Tiêu Điểm Tuần Này: "Đời Ngắn Đừng Ngủ Dài" – Robin Sharma
+            </h2>
+            <p class="text-base text-[#FFF9EF]/90 leading-relaxed">
+              Giữa nhịp sống hối hả, cuốn sách như một tách trà ấm buổi sớm mai nhắc chúng ta dừng lại để tự hỏi: <em>"Mình đang thực sự sống sâu sắc hay chỉ đang vội vã đi qua ngày tháng?"</em> Bài học thực tiễn lớn nhất cho tuần này là <strong>Thực hành lòng biết ơn và dành 20 phút tĩnh lặng mỗi sáng</strong> để đọc sách, nuôi dưỡng tâm hồn.
+            </p>
+            <div class="p-4 rounded-2xl bg-black/25 border-l-4 border-[#D8B66A] text-sm text-[#E5D7C3]">
+              <strong>Bài tập ứng dụng trong tuần:</strong> Viết lời cảm ơn chân thành gửi tới một người thầy (như người Thầy "5T" — Thầy Tuấn Tử Tế Từ Tâm) hoặc một người thân đã trao cho bạn bài học quý trong đời.
+            </div>
+            <div class="pt-2">
+              <button type="button" onclick="openBookExplorer('doi-ngan-dung-ngu-dai')" class="px-6 py-3 rounded-xl bg-[#D8B66A] text-[#284C40] font-bold text-sm cursor-pointer">
+                📖 Đọc trọn bộ 12 mục phân tích cuốn sách này →
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 bg-[#FFF9EF] text-[#4A382D] p-6 rounded-2xl border-2 border-[#D8B66A] space-y-3">
+            <h3 class="font-editorial text-xl font-bold text-[#284C40]">Lộ Trình Đọc Gợi Ý Cho Người Mới</h3>
+            <ol class="space-y-2.5 text-sm">
+              <li class="p-2.5 rounded-xl bg-[#F7EFE1] cursor-pointer hover:bg-[#E8F0EA]" onclick="openBookExplorer('doi-ngan-dung-ngu-dai')">
+                <strong>Tuần 1 (Thức tỉnh):</strong> Đời Ngắn Đừng Ngủ Dài
+              </li>
+              <li class="p-2.5 rounded-xl bg-[#F7EFE1] cursor-pointer hover:bg-[#E8F0EA]" onclick="openBookExplorer('nhan-to-enzyme')">
+                <strong>Tuần 2 (Thân khỏe):</strong> Nhân Tố Enzyme
+              </li>
+              <li class="p-2.5 rounded-xl bg-[#F7EFE1] cursor-pointer hover:bg-[#E8F0EA]" onclick="openBookExplorer('dac-nhan-tam')">
+                <strong>Tuần 3 (Giao tiếp):</strong> Đắc Nhân Tâm &amp; Trí Tuệ Xúc Cảm
+              </li>
+              <li class="p-2.5 rounded-xl bg-[#F7EFE1] cursor-pointer hover:bg-[#E8F0EA]" onclick="openBookExplorer('ba-nguoi-thay-vi-dai')">
+                <strong>Tuần 4 (Sứ mệnh):</strong> Ba Người Thầy Vĩ Đại &amp; Thói Quen Thứ 8
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- MỤC 6: NGHIÊN CỨU CHUYÊN SÂU & CHUYÊN MỤC TRIẾT LÝ SỐNG             -->
+    <!-- Tích hợp Bức hình 33.jpg: "ĐÍCH ĐẾN CUỐI CÙNG: SỐNG CUỘC ĐỜI ĐÁNG SỐNG" -->
+    <!-- =================================================================== -->
+    <section id="nghien-cuu-chuyen-sau" class="space-y-12 scroll-mt-24">
+      <!-- YÊU CẦU 2: Hình “ĐÍCH ĐẾN CUỐI CÙNG: SỐNG CUỘC ĐỜI ĐÁNG SỐNG” đưa vào chuyên mục Triết lý sống -->
+      <div class="rounded-3xl bg-white border-2 border-[#D8B66A] p-6 md:p-10 shadow-xl space-y-8">
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7">
+            <div class="tta-art-frame" onclick="openLightbox(document.getElementById('main-art-33').src, 'Tác phẩm nghệ thuật Chuyên mục Triết lý sống: ĐÍCH ĐẾN CUỐI CÙNG: SỐNG CUỘC ĐỜI ĐÁNG SỐNG — Chữ ký T.T.An')">
+              <img id="main-art-33" src="assets/images/33.jpg" alt="ĐÍCH ĐẾN CUỐI CÙNG: SỐNG CUỘC ĐỜI ĐÁNG SỐNG" class="tta-art-img"/>
+              <span class="tta-art-badge">🔍 Nhấn để xem ảnh lớn nguyên bản</span>
+            </div>
+            <p class="text-xs md:text-sm text-center text-[#6E5A4F] mt-2 italic">
+              Tác phẩm chữ ngọc bích điêu khắc nguyên bản: "Đích Đến Cuối Cùng: Sống Cuộc Đời Đáng Sống" — Chữ ký T.T.An.
+            </p>
+          </div>
+
+          <div class="lg:col-span-5 space-y-4">
+            <span class="px-3.5 py-1 rounded-full bg-[#284C40] text-[#D8B66A] text-xs font-bold uppercase tracking-widest">
+              Chuyên Mục Triết Lý Sống &amp; Nghiên Cứu Chuyên Sâu
+            </span>
+            <h2 class="font-editorial text-2xl md:text-3xl font-bold text-[#284C40]">
+              Đích Đến Cuối Cùng: Sống Cuộc Đời Đáng Sống
+            </h2>
+            <p class="text-base text-[#4A382D] leading-relaxed">
+              Khi đi xuyên qua hàng trăm cuốn sách từ Đông sang Tây — từ <em>Đời ngắn đừng ngủ dài</em>, <em>Ba người thầy vĩ đại</em>, <em>Thói quen thứ 8</em> cho đến <em>Power vs. Force</em> và <em>Delivering Happiness</em> — tất cả các bậc thức giả đều gặp nhau ở một giao điểm duy nhất:
+            </p>
+            <blockquote class="p-4 rounded-2xl bg-[#FFF9EF] border-l-4 border-[#284C40] font-editorial italic text-base text-[#284C40]">
+              "Đích đến cuối cùng của việc đọc sách và tu dưỡng không phải là tích lũy thật nhiều danh vọng, mà là sống một cuộc đời đáng sống: Thân khỏe mạnh, Tâm bình an, Trí sáng suốt và Đời có ích."
+            </blockquote>
+            <p class="text-sm text-[#6E5A4F]">
+              Ba trụ cột thực hành Triết lý sống An Nhiên: <strong>Sống Tỉnh Thức</strong> (Hiểu mình) – <strong>Sống Tử Tế</strong> (Thương người) – <strong>Sống Biết Ơn</strong> (Phụng sự cộng đồng).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHẦN 8: QUY TRÌNH 10 BƯỚC PHÂN TÍCH SÁCH BẰNG AI -->
+      <div class="p-6 md:p-8 rounded-3xl bg-white border border-[#E5D7C3] shadow-sm space-y-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#E5D7C3] pb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-[#284C40] bg-[#E8F0EA] px-3 py-1 rounded-full">Phần 8 • Chuẩn mực học thuật &amp; Bản quyền</span>
+            <h3 class="font-editorial text-2xl font-bold text-[#284C40] mt-2">Quy Trình 10 Bước Phân Tích Sách Bằng AI &amp; Kiểm Duyệt Con Người</h3>
+            <p class="text-sm text-[#6E5A4F] mt-1">
+              Phân biệt rõ giữa bài phân tích giáo dục độc lập với việc sao chép nguyên văn sách có bản quyền. Mọi bản thảo AI đều phải qua Bước 10 (Chủ thư viện Trịnh Thị An phê duyệt).
+            </p>
+          </div>
+        </div>
+        <div id="ai-10-steps-grid" class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4"></div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- MỤC 7: GÓC HỌC TẬP, KHU VỰC THÀNH VIÊN & CÔNG CỤ QUẢN TRỊ (PHẦN 11, 12, 16) -->
+    <!-- =================================================================== -->
+    <section id="goc-hoc-tap" class="space-y-10 scroll-mt-24">
+      <div class="border-b-2 border-[#E5D7C3] pb-4">
+        <span class="text-xs font-bold uppercase tracking-widest text-[#284C40] bg-[#E8F0EA] px-3 py-1 rounded-full">Phần 11, 12 &amp; 16 • Không gian Học tập &amp; Quản trị</span>
+        <h2 class="font-editorial text-3xl font-bold text-[#284C40] mt-2">Góc Học Tập Cá Nhân, Khu Vực Thành Viên &amp; Quản Trị Kho Sách</h2>
+      </div>
+
+      <!-- Thống kê tiến độ học tập -->
+      <div id="member-progress-stats" class="grid grid-cols-2 lg:grid-cols-4 gap-4"></div>
+
+      <div class="grid lg:grid-cols-12 gap-8">
+        <!-- Cột trái: Sổ tay ghi chú & Tủ sách yêu thích (Đang hoạt động trực tiếp trên trình duyệt) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="p-6 rounded-3xl bg-white border border-[#E5D7C3] shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-editorial text-xl font-bold text-[#284C40]">✎ Sổ Tay Ghi Chú &amp; Thực Hành Sách</h3>
+              <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-[#E8F0EA] text-[#284C40]">Đang hoạt động</span>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div>
+                <label for="note-book-select" class="block text-xs font-bold text-[#6E5A4F] mb-1">Chọn cuốn sách:</label>
+                <select id="note-book-select" class="w-full px-3 py-2 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm"></select>
+              </div>
+              <div>
+                <label for="note-action-input" class="block text-xs font-bold text-[#6E5A4F] mb-1">Hành động cam kết ứng dụng:</label>
+                <input id="note-action-input" type="text" placeholder="VD: Lắng nghe trọn vẹn, uống nước ấm..." class="w-full px-3 py-2 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm"/>
+              </div>
+            </div>
+            <div>
+              <label for="note-content-input" class="block text-xs font-bold text-[#6E5A4F] mb-1">Bài học tâm đắc hoặc suy ngẫm của bạn:</label>
+              <textarea id="note-content-input" rows="3" placeholder="Viết lại điều bạn học được từ trang sách hôm nay..." class="w-full px-3.5 py-2.5 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm"></textarea>
+            </div>
+            <button type="button" onclick="savePersonalNote()" class="px-5 py-2.5 rounded-xl bg-[#284C40] text-[#FFF9EF] font-bold text-sm cursor-pointer">
+              💾 Lưu vào Sổ tay Học tập
+            </button>
+
+            <div class="pt-4 border-t border-[#E5D7C3] space-y-3">
+              <h4 class="font-bold text-sm text-[#284C40]">Các ghi chú đã lưu của bạn:</h4>
+              <div id="member-notes-list" class="space-y-3 max-h-80 overflow-y-auto pr-1"></div>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-3xl bg-white border border-[#E5D7C3] shadow-sm space-y-3">
+            <h3 class="font-editorial text-xl font-bold text-[#284C40]">★ Danh Sách Sách Cần Nghiên Cứu (Yêu Thích)</h3>
+            <div id="member-favorites-list" class="space-y-2.5"></div>
+          </div>
+        </div>
+
+        <!-- Cột phải: Minh bạch Kiến trúc Xác thực Thành viên & Bảo vệ Kho sách Thầy Tuấn Tử Tế Từ Tâm (Phần 11, 12, 17, 18) -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="p-6 rounded-3xl bg-[#FFF9EF] border-2 border-[#D8B66A] space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase px-3 py-1 rounded-full bg-[#284C40] text-[#D8B66A]">Phần 11 &amp; 12 • Bảo mật &amp; Phân quyền</span>
+              <span class="text-xs font-semibold text-[#4A382D]">Kiến trúc chuẩn</span>
+            </div>
+            <h3 class="font-editorial text-xl font-bold text-[#284C40]">
+              Cơ Chế Bảo Vệ Kho Sách Thầy Tuấn Tử Tế Từ Tâm &amp; Phân Quyền Thành Viên
+            </h3>
+            <p class="text-sm text-[#4A382D] leading-relaxed">
+              Tuân thủ nghiêm ngặt yêu cầu bảo mật tại <strong>Phần 11, 12 và 17</strong>: Website tuyệt đối không dùng nút đăng nhập giả hay lưu mật khẩu/API key/ID thư mục Google Drive trong mã nguồn HTML/JS công khai.
+            </p>
+            <div class="space-y-2 text-xs md:text-sm text-[#4A382D] bg-white p-4 rounded-2xl border border-[#E5D7C3]">
+              <p class="font-bold text-[#284C40]">1. Tính năng đang hoạt động trực tiếp (Client-side):</p>
+              <p>✓ Khám phá công khai 12 mục phân tích, sơ đồ tư duy, bộ lọc, lưu ghi chú cá nhân, đánh dấu sách yêu thích và công cụ xuất/nhập JSON danh mục.</p>
+              <p class="font-bold text-[#284C40] pt-2">2. Tính năng cần cấu hình Backend khi mở rộng (Server-side):</p>
+              <p>⚙ Xác thực tài khoản thành viên (Supabase Auth / Firebase Auth), kiểm tra quyền truy cập từng tài liệu trên máy chủ (Row-Level Security) và Worker AI đọc PDF từ kho Drive riêng (có hướng dẫn chi tiết trong file tài liệu bàn giao).</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-[#E8F0EA] border border-[#8BAA91] text-xs text-[#284C40]">
+              <strong>Cam kết bảo vệ kho nguồn:</strong> Không có bất kỳ đường dẫn thư mục Google Drive gốc, Folder ID hay file PDF chưa cấp phép nào bị lộ trong mã nguồn trang web.
+            </div>
+          </div>
+
+          <!-- PHẦN 16: Công cụ Quản trị viên Thêm/Bổ sung Sách mà không phải sửa HTML -->
+          <div class="p-6 rounded-3xl bg-white border border-[#E5D7C3] shadow-sm space-y-4">
+            <h3 class="font-editorial text-xl font-bold text-[#284C40]">🛠 Công Cụ Quản Trị: Bổ Sung Sách Mới &amp; Xuất JSON</h3>
+            <p class="text-xs text-[#6E5A4F]">Giúp Chủ thư viện thêm đầu sách mới vào danh mục và xuất cấu trúc dữ liệu `books.json` mà không cần viết lại code HTML.</p>
+            <div class="space-y-3">
+              <input id="admin-book-title" type="text" placeholder="Tên sách xác thực (VD: Đạo Làm Người...)" class="w-full px-3.5 py-2 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm"/>
+              <div class="grid grid-cols-2 gap-2">
+                <input id="admin-book-author" type="text" placeholder="Tác giả" class="w-full px-3.5 py-2 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm"/>
+                <select id="admin-book-category" class="w-full px-3 py-2 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm">
+                  <option value="song-tich-cuc">Sống tích cực</option>
+                  <option value="hieu-ban-than">Hiểu bản thân</option>
+                  <option value="giao-tiep-ung-xu">Giao tiếp và ứng xử</option>
+                  <option value="lanh-dao-quan-tri">Lãnh đạo và quản trị</option>
+                  <option value="kinh-doanh-tai-chinh">Kinh doanh và tài chính</option>
+                  <option value="tam-ly-hoc">Tâm lý học</option>
+                  <option value="suc-khoe-loi-song">Sức khỏe và lối sống</option>
+                  <option value="van-hoa-lich-su">Văn hóa và lịch sử</option>
+                  <option value="triet-hoc-tu-duy">Triết học và tư duy</option>
+                  <option value="hoc-tap-suot-doi">Học tập suốt đời</option>
+                </select>
+              </div>
+              <input id="admin-book-summary" type="text" placeholder="Mô tả ngắn / Thông điệp chính đã duyệt" class="w-full px-3.5 py-2 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm"/>
+              <input id="admin-book-lifechange" type="text" placeholder="Cuốn sách này giúp người đọc thay đổi điều gì?" class="w-full px-3.5 py-2 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm"/>
+              <select id="admin-book-status" class="w-full px-3.5 py-2 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm">
+                <option value="verified">Trạng thái: Đã duyệt công khai</option>
+                <option value="pending">Trạng thái: Bản thảo chờ biên soạn</option>
+              </select>
+              <div class="flex flex-wrap gap-2">
+                <button type="button" onclick="addOrUpdateBookFromAdmin()" class="flex-1 py-2.5 px-4 rounded-xl bg-[#284C40] text-[#FFF9EF] font-bold text-xs cursor-pointer">
+                  + Thêm Sách Vào Thư Viện
+                </button>
+                <button type="button" onclick="exportLibraryJsonCatalog()" class="py-2.5 px-4 rounded-xl bg-[#D8B66A] text-[#284C40] font-bold text-xs cursor-pointer">
+                  ⬇ Xuất JSON Danh Mục
+                </button>
+              </div>
+              <textarea id="admin-json-export-box" rows="4" readonly class="hidden w-full p-2.5 rounded-xl bg-[#1E2421] text-[#D8B66A] font-mono text-xs"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- MỤC 8: GÓC ÂM NHẠC AN NHIÊN (PHẦN 13)                               -->
+    <!-- =================================================================== -->
+    <section id="am-nhac-an-nhien" class="space-y-8 scroll-mt-24">
+      <div class="rounded-3xl bg-gradient-to-br from-[#284C40] to-[#1A332A] text-[#FFF9EF] p-6 md:p-10 border-2 border-[#D8B66A] shadow-xl">
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D8B66A]/20 border border-[#D8B66A] text-[#D8B66A] text-xs font-bold uppercase tracking-widest">
+              <span>Phần 13 • Góc Âm Nhạc An Nhiên</span>
+            </div>
+            <h2 class="font-editorial text-3xl font-bold text-[#FFF9EF]">
+              MỘT CHÚT NHẠC – MỘT TRANG SÁCH
+            </h2>
+            <p class="text-base text-[#E5D7C3] leading-relaxed">
+              Không gian âm nhạc tinh tế, ấm áp bổ trợ cho trải nghiệm đọc sách và chiêm nghiệm. Nhạc mặc định ở trạng thái nghỉ (không tự động phát) để tôn trọng sự tĩnh lặng của bạn.
+            </p>
+
+            <!-- Bộ điều khiển nhạc trực tiếp -->
+            <div class="p-5 rounded-2xl bg-white/10 border border-[#D8B66A]/50 space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <span id="music-status-badge" class="text-xs font-bold text-[#D8B66A] block mb-1">○ Đang tắt (Không tự phát)</span>
+                  <h3 id="music-current-title" class="font-editorial text-xl font-bold text-[#FFF9EF]">Giai Điệu Tĩnh Tâm Đọc Sách</h3>
+                  <p id="music-current-subtitle" class="text-xs text-[#E5D7C3]"></p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-3">
+                <button type="button" onclick="changeMusicTrack(-1)" class="px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-xs font-bold cursor-pointer">⏮ Bài trước</button>
+                <button type="button" id="music-play-toggle-btn" onclick="toggleMusicPlayback()" class="px-5 py-2.5 rounded-xl bg-[#D8B66A] text-[#284C40] font-bold text-sm cursor-pointer shadow">▶ Bật nhạc đọc sách</button>
+                <button type="button" onclick="changeMusicTrack(1)" class="px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-xs font-bold cursor-pointer">Bài tiếp ⏭</button>
+
+                <div class="flex items-center gap-2 ml-auto">
+                  <label for="music-volume-slider" class="text-xs text-[#E5D7C3]">Âm lượng:</label>
+                  <input id="music-volume-slider" type="range" min="0.05" max="0.9" step="0.05" value="0.45" oninput="handleMusicVolumeChange(this.value)" class="w-24 accent-[#D8B66A]"/>
+                  <span id="music-volume-label" class="text-xs font-bold text-[#D8B66A]">45%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <a href="https://youtube.com/@annhienaimusictta" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#D8B66A] text-[#284C40] font-bold text-sm hover:bg-[#e3c57b] transition">
+                <span>▶ Kết nối Kênh YouTube Chính Thức: An Nhiên AI Music — TTA</span>
+                <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 bg-[#FFF9EF] text-[#4A382D] p-5 rounded-2xl border-2 border-[#D8B66A] space-y-3">
+            <h4 class="font-editorial text-lg font-bold text-[#284C40]">Danh Sách Giai Điệu Đọc Sách</h4>
+            <div id="music-playlist-container" class="space-y-2.5"></div>
+            <p class="text-xs text-[#6E5A4F] italic pt-2">
+              * Bạn có thể bật giai điệu hòa tấu nhẹ nhàng ngay trên trang hoặc mở kênh YouTube An Nhiên AI Music (@annhienaimusictta) để thưởng thức trọn bộ các ca khúc trữ tình, chữa lành.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- MỤC 9: GÓC TRƯNG BÀY WEBSITE SÁNG TẠO (PHẦN 14)                     -->
+    <!-- =================================================================== -->
+    <section id="website-kien-tao" class="space-y-8 scroll-mt-24">
+      <div class="border-b-2 border-[#E5D7C3] pb-4">
+        <span class="text-xs font-bold uppercase tracking-widest text-[#284C40] bg-[#E8F0EA] px-3 py-1 rounded-full">Phần 14 • Bộ sưu tập Không gian số</span>
+        <h2 class="font-editorial text-3xl font-bold text-[#284C40] mt-2">NHỮNG KHÔNG GIAN SỐ TÔI ĐÃ KIẾN TẠO</h2>
+        <p class="text-base text-[#6E5A4F] mt-1">Giới thiệu các website và không gian văn hóa số do <strong>Trịnh Thị An – An Nhiên AI — TTA</strong> xây dựng (Không tạo đường dẫn giả; hỗ trợ Quản trị viên bổ sung dự án mới).</p>
+      </div>
+
+      <div id="portfolio-sites-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+
+      <!-- Khung dành cho Quản trị viên bổ sung nhanh Website mới -->
+      <div class="p-6 rounded-3xl bg-white border border-[#E5D7C3] shadow-sm space-y-4">
+        <h3 class="font-editorial text-lg font-bold text-[#284C40]">+ Bổ Sung Website Mới Vào Bộ Sưu Tập (Dành cho Quản trị viên)</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <input id="admin-site-title" type="text" placeholder="Tên website" class="px-3.5 py-2 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm"/>
+          <input id="admin-site-topic" type="text" placeholder="Chủ đề (VD: Giáo dục, Âm nhạc...)" class="px-3.5 py-2 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm"/>
+          <input id="admin-site-desc" type="text" placeholder="Mô tả ngắn" class="px-3.5 py-2 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm"/>
+          <input id="admin-site-url" type="text" placeholder="URL thực tế (để trống nếu chưa có)" class="px-3.5 py-2 rounded-xl border border-[#E5D7C3] bg-[#FFF9EF] text-sm"/>
+        </div>
+        <button type="button" onclick="addPortfolioSiteFromAdmin()" class="px-5 py-2.5 rounded-xl bg-[#284C40] text-[#FFF9EF] font-bold text-xs cursor-pointer">
+          Lưu vào Bộ sưu tập Website
+        </button>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- MỤC 10: HỒ SƠ TÁC GIẢ TRỊNH THỊ AN & KẾT THÚC HÀNH TRÌNH (PHẦN 15)  -->
+    <!-- Tích hợp Chân dung Tác giả Trịnh Thị An & Hình TRANG CUỐI.jpg       -->
+    <!-- =================================================================== -->
+    <section id="gioi-thieu-ket-noi" class="space-y-12 scroll-mt-24">
+
+      <!-- Khối 1: Hồ sơ Chân dung Tác giả & Người sáng lập Trịnh Thị An – An Nhiên AI (TTA) -->
+      <div class="rounded-3xl bg-gradient-to-br from-[#284C40] via-[#1B372D] to-[#3A291F] text-[#FFF9EF] p-6 md:p-10 border-2 border-[#D8B66A] shadow-2xl">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          <!-- Cột Ảnh Chân Dung Thật của Chị Trịnh Thị An -->
+          <div class="lg:col-span-5">
+            <div class="author-portrait-card max-w-md mx-auto" onclick="openLightbox(document.getElementById('founder-main-portrait').src, 'Chân dung Tác giả & Người sáng lập: Trịnh Thị An – An Nhiên AI — TTA')">
+              <div class="rounded-2xl overflow-hidden bg-[#1B2E26] border-2 border-[#D8B66A]">
+                <img id="founder-main-portrait" src="assets/images/trinh-thi-an.jpg" alt="Chân dung Tác giả Trịnh Thị An – Người sáng lập Thư Viện Tri Thức An Nhiên AI" class="w-full h-auto object-cover block"/>
+                <div class="p-4 bg-gradient-to-r from-[#1E3A30] via-[#284C40] to-[#3A2B20] text-center border-t-2 border-[#D8B66A]">
+                  <p class="font-editorial font-bold text-2xl text-[#D8B66A]">TRỊNH THỊ AN</p>
+                  <p class="text-xs uppercase tracking-widest text-[#FFF9EF] font-semibold mt-0.5">
+                    ✦ Tác Giả &amp; Người Sáng Lập • An Nhiên AI (TTA) ✦
+                  </p>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-center text-[#E5D7C3] mt-2.5 italic">
+              🔍 Nhấn vào ảnh chân dung để xem kích thước lớn.
+            </p>
+          </div>
+
+          <!-- Cột Tâm Thư Tác Giả & Thông Tin Kết Nối Chính Thức -->
+          <div class="lg:col-span-7 space-y-5">
+            <span class="px-3.5 py-1 rounded-full bg-[#D8B66A] text-[#284C40] text-xs font-bold uppercase tracking-widest">
+              Phần 15 • Về Tác Giả &amp; Người Kiến Tạo Thư Viện
+            </span>
+            <h2 class="font-editorial text-3xl md:text-4xl font-bold text-[#FFF9EF] leading-snug">
+              Trịnh Thị An – <span class="text-[#D8B66A]">An Nhiên AI (TTA)</span>
+            </h2>
+            <div class="p-6 rounded-2xl bg-[#FFF9EF] text-[#4A382D] border-2 border-[#D8B66A] shadow-lg space-y-3.5 text-base leading-relaxed">
+              <p>
+                "Tôi là <strong class="text-[#284C40]">Trịnh Thị An</strong>, người sáng lập và xây dựng <strong>Kho Báu Tri Thức – Một Đời Biết Ơn (Thư Viện Tri Thức An Nhiên AI)</strong>.
+              </p>
+              <p>
+                Được <strong class="text-[#284C40]">Thầy Tuấn Tử Tế Từ Tâm</strong> — người Thầy <strong>"5T"</strong> đáng kính — trao tặng một kho sách quý, tôi luôn tâm niệm rằng cách đẹp đẽ nhất để giữ gìn một món quà tri thức là đọc sâu, thực hành và biến những bài học trong sách thành không gian học tập hữu ích để lan tỏa tới cộng đồng.
+              </p>
+              <p>
+                Tôi mong rằng mỗi khi bạn ghé thăm thư viện này, bạn sẽ tìm thấy một ý tưởng sáng rõ cho công việc, một sự dịu dàng cho gia đình và một khoảng bình an cho tâm hồn."
+              </p>
+              <div class="pt-2 flex items-center justify-between border-t border-[#E5D7C3]">
+                <div>
+                  <p class="font-handwriting text-2xl font-bold text-[#6B1426]">Trịnh Thị An</p>
+                  <p class="text-xs font-bold uppercase tracking-wider text-[#284C40]">An Nhiên AI — TTA</p>
+                </div>
+                <span class="text-xs font-semibold px-3 py-1 rounded-full bg-[#E8F0EA] text-[#284C40]">Tri ân Người Thầy "5T"</span>
+              </div>
+            </div>
+
+            <!-- Kênh kết nối chính thức -->
+            <div class="grid sm:grid-cols-3 gap-3 pt-1">
+              <a href="https://www.facebook.com/trinhthi.an.5" target="_blank" rel="noopener noreferrer" class="flex flex-col justify-between p-4 rounded-2xl bg-white/10 hover:bg-[#D8B66A] text-[#FFF9EF] hover:text-[#284C40] border border-[#D8B66A] transition">
+                <span class="text-xs opacity-80">Facebook chính thức</span>
+                <span class="font-bold text-sm mt-1">🌐 Trịnh Thị An ↗</span>
+              </a>
+              <a href="https://youtube.com/@annhienaimusictta" target="_blank" rel="noopener noreferrer" class="flex flex-col justify-between p-4 rounded-2xl bg-white/10 hover:bg-[#D8B66A] text-[#FFF9EF] hover:text-[#284C40] border border-[#D8B66A] transition">
+                <span class="text-xs opacity-80">Kênh YouTube</span>
+                <span class="font-bold text-sm mt-1">▶ An Nhiên AI Music ↗</span>
+              </a>
+              <a href="https://zalo.me/0834133344" target="_blank" rel="noopener noreferrer" class="flex flex-col justify-between p-4 rounded-2xl bg-[#D8B66A] hover:bg-[#e5c77d] text-[#284C40] border border-[#FFF9EF] transition shadow-lg">
+                <span class="text-xs font-semibold">Zalo kết nối trực tiếp</span>
+                <span class="font-bold text-base mt-1">💬 0834 133 344</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Khối 2: YÊU CẦU 4: Hình “BIẾT ƠN VÌ TẤT CẢ!” đưa vào khu vực kết thúc hành trình -->
+      <div class="rounded-3xl bg-gradient-to-br from-[#284C40] via-[#1E3A30] to-[#3A2B20] text-[#FFF9EF] p-6 md:p-10 border-2 border-[#D8B66A] shadow-2xl space-y-8">
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7">
+            <div class="tta-art-frame" onclick="openLightbox(document.getElementById('main-art-cuoi').src, 'Tác phẩm nghệ thuật Kết thúc hành trình: BIẾT ƠN VÌ TẤT CẢ! — Chữ ký T.T.An')">
+              <img id="main-art-cuoi" src="assets/images/trang-cuoi.jpg" alt="BIẾT ƠN VÌ TẤT CẢ!" class="tta-art-img"/>
+              <span class="tta-art-badge">🔍 Nhấn để xem ảnh lớn nguyên bản</span>
+            </div>
+            <p class="text-xs md:text-sm text-center text-[#E5D7C3] mt-2 italic">
+              Tác phẩm chữ thạch anh hồng nguyên bản: "Biết Ơn Vì Tất Cả!" — Chữ ký T.T.An.
+            </p>
+          </div>
+
+          <div class="lg:col-span-5 space-y-5">
+            <span class="px-3.5 py-1 rounded-full bg-[#D8B66A] text-[#284C40] text-xs font-bold uppercase tracking-widest">
+              Lời Kết Hành Trình Tri Thức
+            </span>
+            <h2 class="font-editorial text-3xl font-bold text-[#FFF9EF]">
+              Biết Ơn Vì Tất Cả!
+            </h2>
+            <p class="text-base text-[#E5D7C3] leading-relaxed">
+              Cảm ơn bạn đã dành thời gian quý báu bước vào <strong>Kho Báu Tri Thức – Một Đời Biết Ơn</strong>. Mỗi cuốn sách được mở ra, mỗi bài học được đem vào cuộc sống chính là lời tri ân đẹp đẽ nhất gửi tới <strong>Thầy Tuấn Tử Tế Từ Tâm</strong> — Người Thầy "5T".
+            </p>
+
+            <div class="p-5 rounded-2xl bg-white/10 border border-[#D8B66A]/60 space-y-2.5 text-sm md:text-base">
+              <p><strong>Thương hiệu:</strong> <span class="text-[#D8B66A] font-bold">An Nhiên AI — TTA</span></p>
+              <p><strong>Người sáng lập &amp; xây dựng:</strong> <span class="font-bold">Trịnh Thị An</span></p>
+              <p><strong>Nguồn cảm hứng:</strong> Kho sách quý do <strong>Thầy Tuấn Tử Tế Từ Tâm</strong> (Người Thầy "5T") trao tặng.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- CHÂN TRANG (FOOTER) TRANG TRỌNG KÈM HÌNH THU NHỎ "BIẾT ƠN VÌ TẤT CẢ!" -->
+  <!-- ===================================================================== -->
+  <footer class="bg-[#1B332B] text-[#FFF9EF] border-t-4 border-[#D8B66A] mt-16 py-12 px-4">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-5 space-y-3">
+        <div class="flex items-center gap-3">
+          <img src="assets/images/trinh-thi-an.jpg" alt="Tác giả Trịnh Thị An" class="w-14 h-14 rounded-2xl object-cover border-2 border-[#D8B66A] shrink-0"/>
+          <div>
+            <h3 class="font-editorial text-xl md:text-2xl font-bold text-[#D8B66A]">KHO BÁU TRI THỨC – MỘT ĐỜI BIẾT ƠN</h3>
+            <p class="text-xs text-[#E5D7C3]">Người sáng lập: Trịnh Thị An – An Nhiên AI (TTA)</p>
+          </div>
+        </div>
+        <p class="text-sm text-[#E5D7C3]">
+          Thư Viện Tri Thức An Nhiên AI • "Mỗi trang sách mở ra – Một chân trời tri thức."
+        </p>
+        <p class="text-xs text-[#E5D7C3]/80 leading-relaxed">
+          Công trình tri ân <strong>Thầy Tuấn Tử Tế Từ Tâm</strong> (Người Thầy "5T"). Xây dựng và biên tập bởi <strong>Trịnh Thị An – An Nhiên AI — TTA</strong> trên tinh thần phi thương mại, tôn trọng bản quyền và lan tỏa giá trị giáo dục cộng đồng.
+        </p>
+      </div>
+
+      <div class="md:col-span-4 space-y-2 text-sm">
+        <h4 class="font-editorial font-bold text-base text-[#D8B66A] mb-2">Kết Nối Trực Tiếp Tác Giả</h4>
+        <p>👤 Tác giả: <strong>Trịnh Thị An – An Nhiên AI (TTA)</strong></p>
+        <p>🌐 Facebook: <a href="https://www.facebook.com/trinhthi.an.5" target="_blank" rel="noopener noreferrer" class="underline hover:text-[#D8B66A]">facebook.com/trinhthi.an.5</a></p>
+        <p>▶ YouTube: <a href="https://youtube.com/@annhienaimusictta" target="_blank" rel="noopener noreferrer" class="underline hover:text-[#D8B66A]">youtube.com/@annhienaimusictta</a></p>
+        <p>📞 Zalo kết nối: <strong class="text-[#D8B66A]">0834 133 344</strong></p>
+      </div>
+
+      <div class="md:col-span-3">
+        <div class="tta-art-frame p-2" onclick="openLightbox(document.getElementById('footer-art-cuoi').src, 'Biết Ơn Vì Tất Cả! – Trịnh Thị An – An Nhiên AI — TTA')">
+          <img id="footer-art-cuoi" src="assets/images/trang-cuoi.jpg" alt="BIẾT ƠN VÌ TẤT CẢ!" class="w-full h-auto rounded-lg object-contain"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-white/15 flex flex-wrap items-center justify-between gap-4 text-xs text-[#E5D7C3]">
+      <span>© 2026 KHO BÁU TRI THỨC – MỘT ĐỜI BIẾT ƠN • Trịnh Thị An – An Nhiên AI — TTA.</span>
+      <span>BIẾT ƠN THẦY TUẤN TỬ TẾ TỪ TÂM (NGƯỜI THẦY "5T"), NGƯỜI ĐÃ TRAO TẶNG KHO BÁU TRI THỨC NÀY.</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
